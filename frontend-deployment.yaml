@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+        name: frontend-react
+spec:
+        replicas: 2
+        minReadySeconds: 15
+        strategy:
+                type: RollingUpdate
+                rollingUpdate:
+                        maxUnavailable: 1
+                        maxSurge: 1
+        template:
+                metadata:
+                        labels:
+                                app: frontend-react
+                spec:
+                        containers:
+                                - image: trevahok/todoreact:v2
+                                  imagePullPolicy: Always
+                                  name: frontend-react
+                                  ports:
+                                          - containerPort: 80
+
+
